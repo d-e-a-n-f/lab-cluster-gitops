@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-ksqldb
+  namespace: kafka
+  labels:
+    app: kafka-ksqldb
+spec:
+  selector:
+    matchLabels:
+      app: kafka-ksqldb
+  template:
+    metadata:
+      labels:
+        app: kafka-ksqldb
+    spec:
+      containers:
+        - name: kafka-ksqldb
+          image: confluentinc/cp-ksqldb-server:7.2.1
+          ports:
+            - containerPort: 8088
+          env:
+            - name: KSQL_BOOTSTRAP_SERVERS
+              value: "PLAINTEXT://lab-kafka-kafka-bootstrap.kafka:9092"
+            - name: KSQL_LISTENERS
+              value: "http://0.0.0.0:8088/"
+            - name: KSQL_KSQL_SERVICE_ID
+              value: "ksqldb-server_lab_"
+            - name: KSQL_KSQL_SCHEMA_REGISTRY_URL
+              value: "http://kafka-schema-registry.kafka:8081"
+            - name: KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE
+              value: "true"
+            - name: KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE
+              value: "true"
+            - name: KSQL_KSQL_LOGGING_PROCESSING_TOPIC_NAME
+              value: "_ksqldb-server_lab_processing"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-ksqldb
+  namespace: kafka
+spec:
+  type: NodePort
+  selector:
+    app: kafka-ksqldb
+  ports:
+  - name: ksqldb
+    protocol: TCP
+    port: 8088
+    targetPort: 8088

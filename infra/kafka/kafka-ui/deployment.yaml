@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-ui
+  namespace: kafka
+  labels:
+    app: kafka-ui
+spec:
+  selector:
+    matchLabels:
+      app: kafka-ui
+  template:
+    metadata:
+      labels:
+        app: kafka-ui
+    spec:
+      containers:
+        - name: kafka-ui
+          image: provectuslabs/kafka-ui:a9c31e6a32c222da2d28896ec2acbccdf7b308c5
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KAFKA_CLUSTERS_0_NAME
+              value: "lab-kafka"
+            - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+              value: "lab-kafka-kafka-bootstrap.kafka:9092"
+            - name: KAFKA_CLUSTERS_0_ZOOKEEPER
+              value: "lab-kafka-zookeeper-nodes.kafka:2181"
+            - name: KAFKA_CLUSTERS_0_KSQLDBSERVER
+              value: "kafka-ksqldb.kafka:8088"
+            - name: KAFKA_CLUSTERS_0_SCHEMAREGISTRY
+              value: "kafka-schema-registry.kafka:8081"
+            - name: KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME
+              value: "lab-kafka-connect"
+            - name: KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS
+              value: "lab-kafka-connect-connect-api.kafka:8083"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-ui
+  namespace: kafka
+spec:
+  selector:
+    app: kafka-ui
+  ports:
+  - name: ui
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
