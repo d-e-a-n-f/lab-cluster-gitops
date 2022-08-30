@@ -49,7 +49,10 @@ spec:
             - name: "TEAMS"
               value: |-
                 [
-                  "acid"
+                  "lab",
+                  "dev",
+                  "qa",
+                  "prod"
                 ]
             - name: "OPERATOR_UI_CONFIG"
               value: |-
