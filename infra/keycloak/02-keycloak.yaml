@@ -37,7 +37,7 @@ spec:
           "--db=postgres",
           "--db-password=$(KEYCLOAK_DB_PASSWORD)",
           "--db-username=$(KEYCLOAK_DB_USERNAME)",
-          "--db-url=jdbc:postgresql://lab-keycloak-db.default:5432/keycloak",
+          "--db-url=jdbc:postgresql://lab-keycloak-db.keycloak:5432/keycloak",
           "--features=scripts",
           "--health-enabled=true",
           "--metrics-enabled=true",
