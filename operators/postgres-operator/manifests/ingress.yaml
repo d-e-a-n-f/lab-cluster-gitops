@@ -5,10 +5,15 @@ metadata:
   namespace: "default"
   labels:
     application: "postgres-operator-ui"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/whitelist-source-range: 127.0.0.1/8,169.254.0.0/16,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
 spec:
-  # ingressClassName: "ingress-nginx"
   rules:
-    - host: "ui.example.org"
+    - host: "ui.pg.cluster.lab"
       http:
         paths:
           - path: /
