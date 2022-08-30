@@ -30,10 +30,6 @@ spec:
               value: "kafka-ksqldb.kafka:8088"
             - name: KAFKA_CLUSTERS_0_SCHEMAREGISTRY
               value: "kafka-schema-registry.kafka:8081"
-            - name: KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME
-              value: "lab-kafka-connect"
-            - name: KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS
-              value: "lab-kafka-connect-connect-api.kafka:8083"
 ---
 apiVersion: v1
 kind: Service
