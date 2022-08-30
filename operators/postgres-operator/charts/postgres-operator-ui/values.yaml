@@ -46,7 +46,10 @@ envs:
   resourcesVisible: "False"
   targetNamespace: "default"
   teams:
-    - "acid"
+    - "lab"
+    - "dev"
+    - "qa"
+    - "prod"
 
 # configure extra UI ENVs
 # Extra ENVs are writen in kubenertes format and added "as is" to the pod's env variables
@@ -95,7 +98,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   ingressClassName: ""
   hosts:
-    - host: ui.example.org
+    - host: ui.pg.cluster.lab
       paths: [""]
   tls: []
   #  - secretName: ui-tls
