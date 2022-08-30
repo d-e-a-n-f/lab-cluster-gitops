@@ -21,11 +21,11 @@ spec:
             - containerPort: 8080
           env:
             - name: KAFKA_CLUSTERS_0_NAME
-              value: "lab-kafka"
+              value: "lab-cluster"
             - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
-              value: "lab-kafka-kafka-bootstrap.kafka:9092"
+              value: "lab-cluster-kafka-bootstrap.kafka:9092"
             - name: KAFKA_CLUSTERS_0_ZOOKEEPER
-              value: "lab-kafka-zookeeper-nodes.kafka:2181"
+              value: "lab-cluster-zookeeper-nodes.kafka:2181"
             - name: KAFKA_CLUSTERS_0_KSQLDBSERVER
               value: "kafka-ksqldb.kafka:8088"
             - name: KAFKA_CLUSTERS_0_SCHEMAREGISTRY

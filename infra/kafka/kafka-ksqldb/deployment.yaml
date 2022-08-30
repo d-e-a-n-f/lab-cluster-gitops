@@ -21,7 +21,7 @@ spec:
             - containerPort: 8088
           env:
             - name: KSQL_BOOTSTRAP_SERVERS
-              value: "PLAINTEXT://lab-kafka-kafka-bootstrap.kafka:9092"
+              value: "PLAINTEXT://lab-cluster-kafka-bootstrap.kafka:9092"
             - name: KSQL_LISTENERS
               value: "http://0.0.0.0:8088/"
             - name: KSQL_KSQL_SERVICE_ID
