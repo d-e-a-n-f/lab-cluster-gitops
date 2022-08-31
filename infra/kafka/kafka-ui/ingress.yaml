@@ -22,7 +22,7 @@ spec:
                 name: kafka-ui
                 port:
                   number: 8080
-    - host: kafkadrop.tools.cluster.lab
+    - host: kafdrop.tools.cluster.lab
       http:
         paths:
           - path: /(.*)
