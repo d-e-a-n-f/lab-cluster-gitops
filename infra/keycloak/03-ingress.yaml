@@ -1,20 +1,40 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: keycloak
+#   namespace: default
+# spec:
+#   tls:
+#     - hosts:
+#       - auth.cluster.lab
+#   rules:
+#   - host: auth.cluster.lab
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: keycloak
+#             port:
+#               number: 8080
+
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
 metadata:
-  name: keycloak
-  namespace: default
+  name: test-prefix
+  namespace: gloo-system
 spec:
-  tls:
-    - hosts:
-      - auth.cluster.lab
-  rules:
-  - host: auth.cluster.lab
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: keycloak
-            port:
-              number: 8080
+  virtualHost:
+    domains:
+      - 'auth.cluster.lab'
+    routes:
+      - matchers:
+         - prefix: /
+        routeAction:
+          single:
+            upstream:
+              name: keycloak
+              namespace: keycloak
+        options:
+          autoHostRewrite: true
