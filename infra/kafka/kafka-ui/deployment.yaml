@@ -44,3 +44,48 @@ spec:
     protocol: TCP
     port: 8080
     targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafdrop-ui
+  namespace: kafka
+  labels:
+    app: kafdrop-ui
+spec:
+  selector:
+    matchLabels:
+      app: kafdrop-ui
+  template:
+    metadata:
+      labels:
+        app: kafdrop-ui
+    spec:
+      containers:
+        - name: kafdrop-ui
+          image: obsidiandynamics/kafdrop:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KAFKA_BROKERCONNECT
+              value: "lab-cluster-kafka-brokers:9092"
+            - name: SERVER_SERVLET_CONTEXTPATH
+              value: "/"
+            - name: JVM_OPTS
+              value: "-Xms32M -Xmx64M"
+            - name: CMD_ARGS
+              value: "--schemaregistry.connect=kafka-schema-registry.kafka:8081"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafdrop-ui
+  namespace: kafka
+spec:
+  selector:
+    app: kafdrop-ui
+  ports:
+  - name: ui
+    protocol: TCP
+    port: 9000
+    targetPort: 9000

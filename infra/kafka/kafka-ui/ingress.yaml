@@ -22,3 +22,10 @@ spec:
                 name: kafka-ui
                 port:
                   number: 8080
+          - path: /kafdrop/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: kafdrop-ui
+                port:
+                  number: 9000
