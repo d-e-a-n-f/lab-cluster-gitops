@@ -68,7 +68,7 @@ spec:
             - containerPort: 8080
           env:
             - name: KAFKA_BROKERCONNECT
-              value: "lab-cluster-kafka-brokers:9092"
+              value: "lab-cluster-kafka-bootstrap.kafka:9092"
             - name: SERVER_SERVLET_CONTEXTPATH
               value: "/"
             - name: JVM_OPTS
