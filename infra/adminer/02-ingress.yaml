@@ -12,7 +12,7 @@ metadata:
 
 spec:
   rules:
-    - host: admin.db.cluster.lab
+    - host: adminer.tools.cluster.lab
       http:
         paths:
           - path: /(.*)

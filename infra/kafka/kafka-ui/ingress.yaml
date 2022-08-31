@@ -12,7 +12,7 @@ metadata:
 
 spec:
   rules:
-    - host: ui.kafka.cluster.lab
+    - host: kafkaui.tools.cluster.lab
       http:
         paths:
           - path: /(.*)
