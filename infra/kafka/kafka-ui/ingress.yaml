@@ -4,7 +4,7 @@ metadata:
   name: kafka-ui-ingress
   namespace: kafka
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
     kubernetes.io/ingress.class: public
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -22,7 +22,10 @@ spec:
                 name: kafka-ui
                 port:
                   number: 8080
-          - path: /kafdrop/(.*)
+    - host: kafkadrop.tools.cluster.lab
+      http:
+        paths:
+          - path: /(.*)
             pathType: Prefix
             backend:
               service:
